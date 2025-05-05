@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+header {
+  background: #333;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav a {
+  color: #fff;
+  margin-right: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+#logout {
+  background: #fff;
+  color: #333;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.container {
+  padding: 20px;
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
+}
+.post {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+/* Default (unvisited) link color */
+a:link {
+  color: red;
+}
+
+/* Visited links stay blue */
+a:visited {
+  color: red;
+}
+
+/* On hover, links turn red */
+a:hover {
+  color: teal;
+}
+
+/* While the link is being clicked (active), it turns green */
+a:active {
+  color: green;
+}

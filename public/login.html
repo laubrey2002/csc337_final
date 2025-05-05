@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <nav><a href="/index.html">Main Site</a></nav>
+  </header>
+  <div class="container" style="max-width:400px; margin:auto;">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label>Username: <input type="text" name="username" required></label><br/><br/>
+      <label>Password: <input type="password" name="password" required></label><br/><br/>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const f = new FormData(e.target)
+      const username = f.get('username'),
+            password = f.get('password')
+      const res = await fetch('/login', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ username, password })
+      })
+      const data = await res.json()
+      if (!res.ok) return alert(data.message)
+      localStorage.setItem('username', username)
+      localStorage.setItem('password', password)
+      const role = data.message.split(' ').pop()
+      localStorage.setItem('role', role)
+      location.href = '/dashboard.html'
+    })
+  </script>
+</body>
+</html>

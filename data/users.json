@@ -1,0 +1,20 @@
+[
+  {
+    "username": "Jakes",
+    "salt": "d07f05062a4d98749b1868e7d80d7d25",
+    "hash": "a6871c62a2da10bd7ef130c54c9848d95f2584593f046c2926e2a449ff3df68f364807b96a3285487a1c89b474d93c9c208b72995417415dd2927d5b3e1c21c1",
+    "role": "blogger"
+  },
+  {
+    "username": "Jake",
+    "salt": "6f14f0c0328803fc1a328e76015b2fe6",
+    "hash": "7bb9ba687ddc624e263521b30351bdf2bad4115cf21a0aa2b6f8830193e9572d69912710a3889b37f45e5f729a8cc1f3489e67ea0b139243da44d9fa061dce09",
+    "role": "viewer"
+  },
+  {
+    "username": "Jake2",
+    "salt": "bef390782d307a3bd61f49f863410816",
+    "hash": "3c267d894f7ebc6e96eacfd82997677be6ad7ddada9568a6aed7629d363ce4a2a1e28033872716d68789d3008edcbf5facc71b1d0e7d919ba96c3cb0fdfa2f1c",
+    "role": "blogger"
+  }
+]

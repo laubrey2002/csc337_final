@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/dashboard.html">Home</a>
+      <a href="/index.html">Main Site</a>
+    </nav>
+    <button id="logout">Logout</button>
+  </header>
+  <div class="container">
+    <div id="userInfo"></div>
+    <div id="actions"></div>
+    <div id="postsList"></div>
+  </div>
+  <script>
+    const username = localStorage.getItem('username'),
+          password = localStorage.getItem('password'),
+          role = localStorage.getItem('role');
+    if (!username || !password) {
+      alert('Please log in first');
+      location.href = '/login.html';
+    }
+    document.getElementById('logout').onclick = () => {
+      localStorage.clear();
+      location.href = '/index.html';
+    };
+    document.getElementById('userInfo').innerHTML = 
+      `<h3>Welcome, ${username} (${role})</h3>`;
+    if (role === 'blogger') {
+      document.getElementById('actions').innerHTML = 
+        `<a href="/user.html?owner=${username}">My Blog</a> |
+         <a href="/newpost.html">New Post</a><hr/>`;
+    }
+    fetch('/posts')
+      .then(r => r.json())
+      .then(posts => {
+        const out = posts.map(p => `
+          <div class="post">
+            <a href="/post.html?id=${p.id}">${p.title}</a>
+            <br/><small>by ${p.author}</small>
+            
+          </div>
+        `).join('');
+        document.getElementById('postsList').innerHTML =
+          `<h4>All Posts</h4>${out}`;
+      });
+  </script>
+  <!-- <a href="/user.html?owner=${p.author}">${p.title}</a> -->
+  <!-- <p>${p.content}<p> from the div above -->
+</body>
+</html>

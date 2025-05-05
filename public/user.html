@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>User Blog</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <header>
+    <nav><a href="/dashboard.html">Home</a></nav>
+    <button id="logout">Logout</button>
+  </header>
+  <div class="container">
+    <div id="ownerInfo"></div>
+    <div id="actions"></div>
+    <div id="postsList"></div>
+  </div>
+  <script>
+    // load session
+    const username = localStorage.getItem('username'),
+      password = localStorage.getItem('password'),
+      role = localStorage.getItem('role')
+
+    if (!username || !password) {
+      alert('Please log in')
+      window.location.href = '/login.html'
+    }
+
+    document.getElementById('logout').onclick = () => {
+      localStorage.clear()
+      window.location.href = '/index.html'
+    }
+
+    // parse the owner query param
+    const params = new URLSearchParams(window.location.search)
+    const owner = params.get('owner')
+
+    if (!owner) {
+      // no return here—just redirect and stop running the rest
+      window.location.href = '/dashboard.html'
+    } else {
+      // now that we know we have an owner, proceed
+      document.getElementById('ownerInfo').innerHTML = `<h3>${owner}'s Blog</h3>`
+
+      // if it's your own blog and you're a blogger, show "New Post"
+      if (role === 'blogger' && owner === username) {
+        document.getElementById('actions').innerHTML =
+          `<a href="/newpost.html">New Post</a><hr/>`
+      }
+
+      // fetch and render this user's posts
+      fetch('/posts')
+        .then(r => r.json())
+        .then(posts => {
+          const userPosts = posts.filter(p => p.author === owner)
+          const out = userPosts.length
+          // <h4>${p.title}</h4>
+            ? userPosts.map(p => `
+                <div class="post">
+                  <h4><a href="/post.html?id=${p.id}">${p.title}</a></h4>
+                  <p>${p.content}</p>
+                  ${owner === username ? `<a href="/editpost.html?id=${p.id}">✎ Edit</a>
+                  <button class="delete-btn" data-id="${p.id}">Delete</button>` : ''}
+                </div>
+              `).join('')
+            : '<p>No posts yet.</p>'
+          document.getElementById('postsList').innerHTML = out
+          /// Delete Button Capability
+          document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.onclick = async () => {
+              if (!confirm('Delete this post?')) return
+              const res = await fetch(`/posts/${btn.dataset.id}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+              })
+              const data = await res.json()
+              if (!res.ok) {
+                alert(data.message)
+              } else {
+                alert('Post deleted')
+                location.reload()
+              }
+            }
+          })
+          ///
+        })
+    }
+  </script>
+</body>
+
+</html>

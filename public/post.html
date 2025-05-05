@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Post</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/dashboard.html">Home</a>
+      <a href="/index.html">Main Site</a>
+    </nav>
+    <button id="logout">Logout</button>
+  </header>
+
+  <div class="container" style="max-width:800px; margin:auto;">
+    <div id="postArea"></div>
+    <hr/>
+    <div id="commentsSection">
+      <h3>Comments</h3>
+      <div id="commentsList"></div>
+      <h4>Add a comment</h4>
+      <form id="commentForm">
+        <textarea name="content" rows="3" style="width:100%" required></textarea><br/>
+        <button type="submit">Submit Comment</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // session check
+    const username = localStorage.getItem('username'),
+          password = localStorage.getItem('password')
+    if (!username || !password) {
+      alert('Please log in')
+      window.location.href = '/login.html'
+    }
+    document.getElementById('logout').onclick = () => {
+      localStorage.clear()
+      location.href = '/index.html'
+    }
+
+    // get postId from query
+    const params = new URLSearchParams(window.location.search)
+    const postId = params.get('id')
+    if (!postId) {
+      alert('No post specified')
+      window.location.href = '/dashboard.html'
+    } else {
+
+    // Fetch & render the post
+    fetch('/posts')
+      .then(r => r.json())
+      .then(posts => {
+        const post = posts.find(p => p.id == postId)
+        if (!post) {
+          alert('Post not found')
+          window.location.href = '/dashboard.html'
+        }
+        document.getElementById('postArea').innerHTML = `
+          <div class="post">
+            <h2>${post.title}</h2>
+            <small>by ${post.author}</small>
+            <p>${post.content}</p>
+          </div>`
+      })
+    }
+
+    // Fetch & render comments
+    function loadComments() {
+      fetch(`/comments/${postId}`)
+        .then(r => r.json())
+        .then(comments => {
+          const html = comments.length
+            ? comments.map(c => `
+                <div class="post">
+                  <strong>${c.author}</strong>
+                  <p>${c.content}</p>
+                </div>
+              `).join('')
+            : '<p>No comments yet.</p>'
+          document.getElementById('commentsList').innerHTML = html
+        })
+    }
+    loadComments()
+
+    // Handle new comment submission
+    document.getElementById('commentForm')
+      .addEventListener('submit', async e => {
+        e.preventDefault()
+        const content = e.target.content.value
+        const res = await fetch(`/comments/${postId}`, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ username, password, content })
+        })
+        const data = await res.json()
+        if (!res.ok) {
+          return alert(data.message)
+        }
+        e.target.reset()
+        loadComments()
+      })
+  </script>
+</body>
+</html>

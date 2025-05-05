@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Post</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <nav><a href="/dashboard.html">Home</a></nav>
+    <button id="logout">Logout</button>
+  </header>
+  <div class="container" style="max-width:600px; margin:auto;">
+    <h2>Create New Post</h2>
+    <form id="postForm">
+      <div><label>Title: <input type="text" name="title" required></label></div><br/>
+      <div><label>Content:<br/>
+        <textarea name="content" rows="6" cols="50" required></textarea>
+      </label></div><br/>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <script>
+    const username = localStorage.getItem('username'),
+          password = localStorage.getItem('password'),
+          role = localStorage.getItem('role')
+    if (!username || !password || role !== 'blogger') {
+      alert('Access denied')
+      location.href = '/dashboard.html'
+    }
+    document.getElementById('logout').onclick = () => {
+      localStorage.clear()
+      location.href = '/index.html'
+    }
+    document.getElementById('postForm').addEventListener('submit', async e => {
+      e.preventDefault()
+      const f = new FormData(e.target)
+      const res = await fetch('/posts', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          username, password,
+          title: f.get('title'),
+          content: f.get('content')
+        })
+      })
+      const data = await res.json()
+      if (!res.ok) return alert(data.message)
+      alert('Post created!')
+      location.href = `/user.html?owner=${username}`
+    })
+  </script>
+</body>
+</html>

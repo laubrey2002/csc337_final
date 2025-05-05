@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <nav><a href="/index.html">Main Site</a></nav>
+  </header>
+  <div class="container" style="max-width:400px; margin:auto;">
+    <h2>Register</h2>
+    <form id="registerForm">
+      <label>Username: <input type="text" name="username" required></label><br/><br/>
+      <label>Password: <input type="password" name="password" required></label><br/><br/>
+      <label>Role:
+        <select name="role">
+          <option value="viewer">Viewer</option>
+          <option value="blogger">Blogger</option>
+        </select>
+      </label><br/><br/>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async e => {
+      e.preventDefault()
+      const f = new FormData(e.target)
+      const payload = {
+        username: f.get('username'),
+        password: f.get('password'),
+        role: f.get('role')
+      }
+      const res = await fetch('/register', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      })
+      const data = await res.json()
+      alert(data.message)
+      if (res.ok) location.href = '/login.html'
+    })
+  </script>
+</body>
+</html>
