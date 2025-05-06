@@ -2,18 +2,25 @@
 <html>
 <head>
   <title>Dashboard</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/dashboard_styles.css">
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="/dashboard.html">Home</a>
-    </nav>
-    <button id="logout">Logout</button>
-  </header>
+
+  <div style="background-image:radial-gradient(rgb(244, 167, 226),rgb(239, 136, 206));position:fixed;width:100%;height:100%;left:0px;top:0px;">
+    <div id="bg-sbw">
+      <header>
+        <nav>
+          <a class="navigate" href="/index.html">Home</a>
+          <a class="navigate" href="/dashboard.html">Dashboard</a>
+          <span id="actions"></span>
+          <button class="navigate" id="logout">Logout</button>
+        </nav>
+      </header>
+      <div id="userInfo"></div>
+    </div>
+  </div>
+
   <div class="container">
-    <div id="userInfo"></div>
-    <div id="actions"></div>
     <div id="postsList"></div>
   </div>
   <script>
@@ -29,11 +36,11 @@
       location.href = '/index.html'
     }
     document.getElementById('userInfo').innerHTML = 
-      `<h3>Welcome, ${username} (${role})</h3>`
+      `<p>Welcome, <span id="user">${username}</span>! (${role})</p>`
     if (role === 'blogger') {
       document.getElementById('actions').innerHTML = 
-        `<a href="/user.html?owner=${username}">My Blog</a> |
-         <a href="/newpost.html">New Post</a><hr/>`
+        `<a class="navigate" href="/user.html?owner=${username}">My Blog</a>
+         <a class="navigate" href="/newpost.html">New Post</a>`
     }
     fetch('/posts')
       .then(r => r.json())
@@ -45,7 +52,7 @@
             ${ role === 'admin'? `<button class="delete-post-btn" data-id="${p.id}">Delete</button>`: ''}
           </div>
         `).join('')
-        document.getElementById('postsList').innerHTML = `<h4>All Posts</h4>${out}`
+        document.getElementById('postsList').innerHTML = `<p style="font-size:30px;margin-top:0px;">All Posts</p>${out}`
 
         // Delete Button Capability
         document.querySelectorAll('.delete-post-btn').forEach(btn => {

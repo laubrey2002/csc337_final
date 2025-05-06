@@ -1,0 +1,163 @@
+#bg-sbw {
+    text-align: center;
+    position:relative;
+    width: 100%;
+    height: 100%;
+    left:0px;
+    top:0px;
+    background-image: url("cat1.png");
+    background-size: 10%;
+    animation: pan 180s linear infinite;
+}
+@keyframes pan {
+    0% {
+        background-position: 100% 0%;
+    }
+    100% {
+        background-position: 0% 100%;
+    }
+}
+
+a {
+    color:rgb(255, 0, 76);
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:bold;
+    text-decoration: none;
+}
+a:hover {
+    color: blueviolet;
+}
+a:active {
+    color: rgb(190, 50, 255);
+}
+
+.post {
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right:10px;
+    border: 2px solid hotpink;
+    padding: 10px;
+    border-radius:15px;
+}
+
+nav {
+    text-align: center;
+}
+
+p {
+    color: white;
+    text-shadow: 2px 2px rgb(244, 65, 155);
+    font-weight:bold;
+    font-size:larger;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+small {
+    color:rgb(105, 38, 169);
+    font-weight:bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+#user {
+    color: yellow;
+}
+
+.delete-comment-btn, #commentbuddy, .delete-btn, .delete-post-btn {
+    background-color: white;
+    color: rgb(244, 65, 155);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:bold;
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:10px;
+    padding:5px;
+    padding-left:10px;
+    padding-right:10px;
+    border: 2px solid rgb(244, 65, 155);
+    border-radius:10px;
+}
+.delete-comment-btn:hover, #commentbuddy:hover, .delete-btn:hover, .delete-post-btn:hover {
+    border: 2px solid blueviolet;
+    color: blueviolet;
+}
+.delete-comment-btn:active, #commentbuddy:active, .delete-btn:active, .delete-post-btn:active {
+    border: 2px solid rgb(190, 50, 255);
+    color: rgb(190, 50, 255);
+}
+
+.navigate {
+    background-color: white;
+    box-shadow: 5px 5px rgb(244, 65, 155);
+    color: rgb(244, 65, 155);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:large;
+    font-weight:bold;
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:10px;
+    text-decoration: none;
+    padding:5px;
+    padding-left:10px;
+    padding-right:10px;
+    border: 0px;
+}
+.navigate:hover {
+    box-shadow: 5px 5px blueviolet;
+    color: blueviolet;
+}
+.navigate:active {
+    box-shadow: 5px 5px rgb(190, 50, 255);
+    color: rgb(190, 50, 255);
+}
+
+.container {
+    position:relative;
+    top:100px;
+    border: 4px solid hotpink;
+    width: 50%;
+    margin-left:25%;
+    margin-right:25%;
+    background-color:pink;
+    border-radius:15px;
+    padding: 20px;
+}
+
+.blog_content {
+    text-shadow: 0px 0px;
+    color:rgb(105, 38, 169);
+}
+
+.comment {
+    text-shadow: 0px 0px;
+    color:rgb(244, 65, 155);
+}
+strong {
+    color:rgb(244, 65, 155);
+    font-weight:bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h2 {
+    color: rgb(105, 38, 169);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    font-weight:bold;
+}
+
+h3, h4 {
+    color: rgb(105, 38, 169);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:bold;
+}
+
+textarea {
+    border: 2px solid rgb(244, 65, 155);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(244, 65, 155);
+    padding: 5px;
+    border-radius:10px;
+    font-weight:bold;
+}
