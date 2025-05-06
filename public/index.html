@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Welcome to Super Blog World</title>
-  <link rel="stylesheet" href="/styles.css">
+  <title>SUPER BLOG WORLD</title>
+  <link rel="stylesheet" href="/index_styles.css">
+  <script>
+    function loadUserInfo() {
+      const username = localStorage.getItem('username');
+      const password = localStorage.getItem('password');
+      const buttons = document.getElementById("buttons");
+      const welcome = document.getElementsByTagName("p")[0];
+
+      if (!username || !password) {
+        buttons.innerHTML = `<a href="/login.html">Login</a><a href="/register.html">Register</a>`;
+        welcome.innerHTML = "Welcome in!";
+      } else {
+        buttons.innerHTML = `<a href="/dashboard.html">Dashboard</a><a href="/index.html" onclick=logout()>Logout</a>`;
+        welcome.innerHTML = `Welcome, <span>${username}</span>!`;
+      }
+    }
+
+    function logout() {
+      localStorage.clear();
+      location.href = '/index.html';
+    }
+      
+  </script>
 </head>
-<body>
-  <header>
-    <nav>
-      <a href="/login.html">Login</a>
-      <a href="/register.html">Register</a>
-    </nav>
-  </header>
-  <div class="container">
-    <h1>Welcome to Your Local Blog</h1>
-    <p>Browse and discover posts by our community.</p>
+<body onload="loadUserInfo()">
+  <div style="background-image:radial-gradient(rgb(244, 167, 226),rgb(239, 136, 206));position:fixed;width:100%;height:100%;left:0px;top:0px;">
+    <div id="bg-sbw">
+        <div id="sbw">
+          <h1>SUPER BLOG WORLD</h1>
+          <p> Welcome in! </p>
+          <div id="buttons">
+            <a href="/login.html">Login</a>
+            <a href="/register.html">Register</a>
+            <a href="/dashboard.html">Dashboard</a>
+            <a onclick="logout()">Logout</a>
+          </div>
+      </div>  
+    </div>
   </div>
+  
 </body>
 </html>

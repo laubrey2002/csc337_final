@@ -2,26 +2,31 @@
 <html>
 <head>
   <title>Register</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/loginregister_styles.css">
 </head>
 <body>
   <header>
     <nav><a href="/index.html">Main Site</a></nav>
   </header>
-  <div class="container" style="max-width:400px; margin:auto;">
-    <h2>Register</h2>
-    <form id="registerForm">
-      <label>Username: <input type="text" name="username" required></label><br/><br/>
-      <label>Password: <input type="password" name="password" required></label><br/><br/>
-      <label>Role:
-        <select name="role">
-          <option value="viewer">Viewer</option>
-          <option value="blogger">Blogger</option>
-        </select>
-      </label><br/><br/>
-      <button type="submit">Register</button>
-    </form>
+  <div style="background-image:radial-gradient(rgb(244, 167, 226),rgb(239, 136, 206));position:fixed;width:100%;height:100%;left:0px;top:0px;">
+    <div id="bg-sbw">
+      <div class="container">
+        <h2>Register</h2>
+        <form id="registerForm">
+          <label>Username: <input type="text" name="username" required></label><br/><br/>
+          <label>Password: <input type="password" name="password" required></label><br/><br/>
+          <label>Role:<select name="role">
+              <option value="viewer">Viewer</option>
+              <option value="blogger">Blogger</option>
+            </select>
+          </label><br/><br/>
+          <button type="submit">Register</button>
+        </form>
+      </div>
+      <a href="/index.html">Back Home</a>
+    </div>
   </div>
+  
   <script>
     document.getElementById('registerForm').addEventListener('submit', async e => {
       e.preventDefault()

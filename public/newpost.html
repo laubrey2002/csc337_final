@@ -2,22 +2,34 @@
 <html>
 <head>
   <title>New Post</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/edit_styles.css">
 </head>
 <body>
-  <header>
-    <nav><a href="/dashboard.html">Home</a></nav>
-    <button id="logout">Logout</button>
-  </header>
-  <div class="container" style="max-width:600px; margin:auto;">
-    <h2>Create New Post</h2>
-    <form id="postForm">
-      <div><label>Title: <input type="text" name="title" required></label></div><br/>
-      <div><label>Content:<br/>
-        <textarea name="content" rows="6" cols="50" required></textarea>
-      </label></div><br/>
-      <button type="submit">Submit</button>
-    </form>
+  <div style="background-image:radial-gradient(rgb(244, 167, 226),rgb(239, 136, 206));position:fixed;width:100%;height:100%;left:0px;top:0px;">
+    <div id="bg-sbw">
+      <header>
+        <nav>
+          <a class="navigate" href="/index.html">Home</a>
+          <a class="navigate" href="/dashboard.html">Dashboard</a>
+          <button class="navigate" id="logout">Logout</button>
+        </nav>
+      </header>
+
+      <div class="container">
+        <h2>Create Post</h2>
+        <form id="postForm">
+          <div>
+            <label>Title: <input type="text" name="title" id="title" required></label>
+          </div><br/>
+          <div>
+            <label>Content:<br/>
+              <textarea name="content" id="content" rows="6" cols="50" required></textarea>
+            </label>
+          </div><br/>
+          <button id="save" type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
   </div>
   <script>
     const username = localStorage.getItem('username'),
