@@ -29,23 +29,29 @@ This project is a Express-based blog site with **file-based JSON storage**. It s
 ```text
 blog-server/
 ├── data/
-│   ├── users.json       # User accounts: { username, salt, hash, role }
-│   ├── posts.json       # Blog posts: { id, title, content, author }
-│   └── comments.json    # Comments: { id, postId, content, author }
-├── public/              # Front-end assets
-│   ├── index.html       # Home page
-│   ├── register.html    # User registration (viewer or blogger only)
-│   ├── login.html       # User login form
-│   ├── dashboard.html   # Main dashboard after login
-│   ├── user.html        # View a specific user's blog posts
-│   ├── post.html        # View a single post and its comments
-│   ├── newpost.html     # Blogger-only: create new post
-│   ├── editpost.html    # Blogger-only: edit a post
-│   └── styles.css       # Shared styles
+│   ├── users.json           # User accounts: { username, salt, hash, role }
+│   ├── posts.json           # Blog posts: { id, title, content, author }
+│   └── comments.json        # Comments: { id, postId, content, author }
+├── public/                  # Front-end assets
+│   ├── index.html           # Home page
+│   ├── index_style.css      # Styles for index page
+│   ├── register.html        # User registration (viewer or blogger only)
+│   ├── login.html           # User login form
+│   ├── dashboard.html       # Main dashboard after login
+│   ├── dashboard_style.css  # Styles for dashboard
+│   ├── user.html            # View a specific user's blog posts
+│   ├── post.html            # View a single post and its comments
+│   ├── post_styles.css      # Styles for post view page
+│   ├── newpost.html         # Blogger-only: create new post
+│   ├── editpost.html        # Blogger-only: edit a post
+│   ├── edit_style.css       # Styles for edit page
+│   ├── styles.css           # Shared site-wide styles
+│   └── cat1.png             # Unique cat photo for background image
 ├── utils/
-│   ├── db.js            # Read/write JSON files
-│   └── crypto.js        # Password hashing & verification
-└── server.js            # Express server setup & routes
+│   ├── db.js                # Read/write JSON files
+│   └── crypto.js            # Password hashing & verification
+└── server.js                # Express server setup & routes
+
 ```
 
 ---
