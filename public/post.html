@@ -8,7 +8,6 @@
   <header>
     <nav>
       <a href="/dashboard.html">Home</a>
-      <a href="/index.html">Main Site</a>
     </nav>
     <button id="logout">Logout</button>
   </header>
@@ -30,7 +29,8 @@
   <script>
     // session check
     const username = localStorage.getItem('username'),
-          password = localStorage.getItem('password')
+          password = localStorage.getItem('password'),
+          role = localStorage.getItem('role')
     if (!username || !password) {
       alert('Please log in')
       window.location.href = '/login.html'
@@ -76,10 +76,28 @@
                 <div class="post">
                   <strong>${c.author}</strong>
                   <p>${c.content}</p>
+                  ${ (c.author === username || role === 'admin') ? `<button class="delete-comment-btn" data-id="${c.id}">Delete</button>`: ''}
                 </div>
               `).join('')
             : '<p>No comments yet.</p>'
           document.getElementById('commentsList').innerHTML = html
+
+          // Delete Button Capability
+          document.querySelectorAll('.delete-comment-btn').forEach(btn => {
+            btn.onclick = async () => {
+              if (!confirm('Delete this comment?')) return
+              const res = await fetch(`/comments/${btn.dataset.id}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+              })
+              const data = await res.json()
+              if (!res.ok) return alert(data.message)
+              alert('Comment deleted')
+              loadComments()   // re‐load the list
+            }
+          })
+          //
         })
     }
     loadComments()

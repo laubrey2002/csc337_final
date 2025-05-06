@@ -62,6 +62,7 @@
                   <p>${p.content}</p>
                   ${owner === username ? `<a href="/editpost.html?id=${p.id}">✎ Edit</a>
                   <button class="delete-btn" data-id="${p.id}">Delete</button>` : ''}
+                  ${ role === 'admin' ? `<button class="delete-btn" data-id="${p.id}">Delete</button>`: ''}
                 </div>
               `).join('')
             : '<p>No posts yet.</p>'

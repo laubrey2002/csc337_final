@@ -16,5 +16,23 @@
     "salt": "bef390782d307a3bd61f49f863410816",
     "hash": "3c267d894f7ebc6e96eacfd82997677be6ad7ddada9568a6aed7629d363ce4a2a1e28033872716d68789d3008edcbf5facc71b1d0e7d919ba96c3cb0fdfa2f1c",
     "role": "blogger"
+  },
+  {
+    "username": "jenny",
+    "salt": "0df61f85580919aa1c7c2c79ef02b247",
+    "hash": "01fe22cd61751979bdaf1b9342bae0593cf3b9514eb7a87aee8534df732ea405418a6958a1ada5099117d88d3e337ad1384bebb958e899f9ad89103d6b450155",
+    "role": "viewer"
+  },
+  {
+    "username": "admin1",
+    "salt": "1b035a9ad053eb8743b59d0f1fa53829",
+    "hash": "dc8b3648f43217c8e2c852567cd960e8d3cb00d8796f893d5bd1b5a198d99e791492f8adcc9d60f983b5ea169fa9ea3ec28ed387294d0cb33181449fc84c6a30",
+    "role": "admin"
+  },
+  {
+    "username": "admin2",
+    "salt": "9a9a3a5b952a55168bd83855da94f6c9",
+    "hash": "40b399e1fa44d9a57b6f588bd9c7d552e92a322866bf2d83916fef43df4f1974553c5879748b911f0739626e6a75013f5220e32eb3bc7137c7aa8299687e6c44",
+    "role": "admin"
   }
 ]

@@ -8,7 +8,6 @@
   <header>
     <nav>
       <a href="/dashboard.html">Home</a>
-      <a href="/index.html">Main Site</a>
     </nav>
     <button id="logout">Logout</button>
   </header>
@@ -20,21 +19,21 @@
   <script>
     const username = localStorage.getItem('username'),
           password = localStorage.getItem('password'),
-          role = localStorage.getItem('role');
+          role = localStorage.getItem('role')
     if (!username || !password) {
-      alert('Please log in first');
-      location.href = '/login.html';
+      alert('Please log in first')
+      location.href = '/login.html'
     }
     document.getElementById('logout').onclick = () => {
-      localStorage.clear();
-      location.href = '/index.html';
-    };
+      localStorage.clear()
+      location.href = '/index.html'
+    }
     document.getElementById('userInfo').innerHTML = 
-      `<h3>Welcome, ${username} (${role})</h3>`;
+      `<h3>Welcome, ${username} (${role})</h3>`
     if (role === 'blogger') {
       document.getElementById('actions').innerHTML = 
         `<a href="/user.html?owner=${username}">My Blog</a> |
-         <a href="/newpost.html">New Post</a><hr/>`;
+         <a href="/newpost.html">New Post</a><hr/>`
     }
     fetch('/posts')
       .then(r => r.json())
@@ -43,12 +42,29 @@
           <div class="post">
             <a href="/post.html?id=${p.id}">${p.title}</a>
             <br/><small>by ${p.author}</small>
-            
+            ${ role === 'admin'? `<button class="delete-post-btn" data-id="${p.id}">Delete</button>`: ''}
           </div>
-        `).join('');
-        document.getElementById('postsList').innerHTML =
-          `<h4>All Posts</h4>${out}`;
-      });
+        `).join('')
+        document.getElementById('postsList').innerHTML = `<h4>All Posts</h4>${out}`
+
+        // Delete Button Capability
+        document.querySelectorAll('.delete-post-btn').forEach(btn => {
+          btn.onclick = async () => {
+            if (!confirm('Delete this post?')) return
+            const res = await fetch(`/posts/${btn.dataset.id}`, {
+              method: 'DELETE',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, password })
+            })
+            const data = await res.json()
+            if (!res.ok) return alert(data.message)
+            alert('Post deleted')
+            location.reload()
+          }
+        })
+        //
+
+      })
   </script>
   <!-- <a href="/user.html?owner=${p.author}">${p.title}</a> -->
   <!-- <p>${p.content}<p> from the div above -->

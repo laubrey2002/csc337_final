@@ -78,12 +78,32 @@ app.delete('/posts/:id', auth, (req, res) => {
     return res.status(404).json({ message: 'Post not found' })
   }
   const post = posts[idx]
-  if (post.author !== req.user.username) {
+  // if (post.author !== req.user.username) {
+  //   return res.status(403).json({ message: 'Cannot delete this post' })
+  // }
+
+  // Admins may delete any post, bloggers only their own
+  if (req.user.role !== 'admin' && post.author !== req.user.username) {
     return res.status(403).json({ message: 'Cannot delete this post' })
   }
   posts.splice(idx, 1)
   write('posts.json', posts)
   res.json({ message: 'Post deleted' })
+})
+
+// DELETE /comments/:commentId
+app.delete('/comments/:commentId', auth, (req, res) => {
+  const comments = read('comments.json')
+  const idx = comments.findIndex(c => c.id == req.params.commentId)
+  if (idx === -1) return res.status(404).json({ message: 'Comment not found' })
+  const comment = comments[idx]
+  // admin can delete any comment; commenter can delete their own
+  if (req.user.role !== 'admin' && comment.author !== req.user.username) {
+    return res.status(403).json({ message: 'Cannot delete this comment' })
+  }
+  comments.splice(idx, 1)
+  write('comments.json', comments)
+  res.json({ message: 'Comment deleted' })
 })
 
 // End of Delete Block
